@@ -23,7 +23,6 @@ class Game {
 
     new p5(p => {
       p.setup = () => {
-        p.frameRate(game.frameRate)
         p.createCanvas(game.size, game.size)
       }
 
@@ -57,7 +56,14 @@ class Game {
           p.text(game.snake.brain.score.toString(), 5, 20)
           return
         }
-
+        
+        if (document.getElementById('train_fps').checked) {
+          p.frameRate(60)
+        }
+        else {
+          p.frameRate(10)
+        }
+       
         p.background(255)
 
         game.snake.move(game)
