@@ -1,7 +1,7 @@
 // game settings
 
-const GAMES = 60
-const GAME_SIZE = 200
+const GAMES = 30
+const GAME_SIZE = 100
 const GAME_UNIT = 5
 const FRAME_RATE = 60
 
