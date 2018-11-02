@@ -22,4 +22,6 @@ Each snake is graded for how 'fit' it is and for every move it makes, it is awar
   - If the snake survived a 'near miss' situation: 100  (might want to reduce this)
 
 There are other scenarios available in `src/constants.js` for which points may be awarded.
+
+#### All points are multiplied by a scaling factor which depends on the length of the snake [factor = max(1, 0.2 * snake_lenght)]
   
