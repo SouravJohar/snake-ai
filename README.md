@@ -1,13 +1,13 @@
-# snake-neural-network
+# snake-ai
 
-An experiment with neural network and genetic algorithms.
+A NEAT way to play the snake game. An agent which learns how to master the snake game through genetic evolution of Neural Networks.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/zonetti/snake-neural-network/master/demo.gif" width="50%">
-</p>
+## Inputs to the network
+Most of these inputs are binary with the exception of the first one (takes the values 0, 1 and -1)
 
-## Stack
-
-* **[p5.js](https://p5js.org/):** Graphics and animation
-* **[Frappe Charts](https://frappe.github.io/charts/):** Chart showing the score history
-* **[Neataptic](https://wagenaartje.github.io/neataptic/):** Neural network and neuro-evolution
+  - Can I move forward?
+  - Can I move left?
+  - Can I move right?
+  - Is the food in front of me?
+  - Is the food to my left?
+  - Is the food to my right?
