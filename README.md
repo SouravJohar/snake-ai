@@ -24,8 +24,13 @@ Each snake is graded for how 'fit' it is and for every move it makes, it is awar
 There are other scenarios available in `src/constants.js` for which points may be awarded.
 
 #### All points (except death points) are multiplied by a scaling factor which depends on the length of the snake
-    factor = max(1, 0.2 * snake_lenght)
+    factor = max(1, 0.2 * snake_length)
 
 There are no limits for the maximum number of turns a snake can make, however snakes which do not show progress (snakes which loop infinitely) over a period of time (400 steps) are killed.
+
+
+## Observations
+
+Trained over a few generations (15-20), the snake shows remarkable abilities. It is able to navigate through the grid, locate the food and eat it. It is also able to strike a balance between staying alive and increasing its score. The snake grows really long, more than double the grid size. In such cases, it also learns how to avoid eating itself to death due to lack of space to move.
 
   
