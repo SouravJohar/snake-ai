@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>Snake AI - A neural network and neuro-evolution experiment</title>
+    <link rel="stylesheet" href="lib/style.css">
+    <script src="lib/dv3.min.js"></script>
+    <script src="lib/cola.js"></script>
+
+    <script src="lib/neataptic.min.js"></script>
+    <script src="lib/graph.js"></script>
+    <link rel="stylesheet" type="text/css" href="lib/graph.css">
+  </head>
+  <body>
+    <div class="container">
+
+      <div class="row">
+        <h3 style="margin-left:25%; margin-top:15"> Neural Network Topology</h3>
+        <svg class="draw" width="1000px" height="400px"/>
+      </div>
+
+    </div>
+    <p style="margin-top:15;margin-left:10%">Experiment Speed: <br> <input type="radio" id="train_fps" name="fps" value="120" checked> Train<br>
+        <input type="radio" id="normal_fps" name="fps" value="10"> Normal<br> </p>
+    <div id="wrapper">
+
+      <div id="chart"></div>
+      <div id="status">
+        <p>generation<br><span id="generation">0</span></p>
+        <p>highest score<br><span id="highest-score">0</span></p>
+      </div>
+    </div>
+
+
+    <script src="lib/p5.min.js"></script>
+    <script src="lib/frappe-charts.min.iife.js"></script>
+    <script src="src/constants.js"></script>
+    <script src="src/snake.js"></script>
+    <script src="src/food.js"></script>
+    <script src="src/game.js"></script>
+    <script src="src/runner.js"></script>
+    <script src="src/main.js"></script>
+  </body>
+</html>
