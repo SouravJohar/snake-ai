@@ -1,0 +1,464 @@
+<h1 id="aneatwaytoplaysnake">A NEAT way to play Snake</h1>
+
+<p><a href=""><img src="http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake.png" alt="N|Solid" /></a></p>
+
+<p>This reposortory contains the source code which evolves a Neural Network to play and master the Snake game. This code runs on the browser, so it's really easy to set it up. The stack used is:</p>
+
+<ul>
+<li>JavaScript</li>
+
+<li>neataptic.js</li>
+
+<li>p5.js</li>
+
+<li>charts.js</li>
+</ul>
+
+<h1 id="approach">Approach</h1>
+
+<p>We use Neuroevolution to train a neural network to play the snake game. It combines Evolutionary Algorithms (Genetic Programming) with Deep Learning - in other words, it genetically evolves the most-suited and "fittest" Neural Network for a given task, in this case, to play the Snake game.</p>
+
+<h5 id="whyneuroevolution">Why Neuroevolution?</h5>
+
+<ul>
+<li>NE does not need a dataset to train a Neural Network. It trains the network over mutiple simulations of the actual game, via mutations and cross-overs of the "fittest" individuals. </li>
+
+<li>NE finds use in domains where each move results in a different perception of the enviroment.</li>
+
+<li>NE is very generic; the same algorithm can, with relatively few tweaks, be applied to a large number of different game-related tasks.</li>
+
+<li>Games are excellent testbeds for neuroevolution research (and other AI research)</li>
+
+<li>Other game playing algorithms (like A*) are tree-based search algorithms and are highly intensive.</li>
+</ul>
+
+<p>We use <strong>Neuroevolution of Augmenting Topologies (NEAT)</strong> to evolve the most optimal and accurate neural network to master the Snake game.</p>
+
+<p><a href="http://nn.cs.utexas.edu/downloads/papers/stanley.ec02.pdf">NEAT</a> is a special Neuroevolution algorithm which evolves Neural Networks from scratch, while generating children Neural Networks which are resemble their parents topologically, as well as geneticallly.</p>
+
+<p>The overall, high-level idea is that we award positive points for every good move the snake makes (like eating the apple!) and we reduce some points when it makes a bad move (snake ate its own tail!). The fitenss function computes this score for each snake throughout its life time, based on which the evolution process happens. This now becomes a <strong>Reinforcement Learning</strong> problem.</p>
+
+<h1 id="architecutre">Architecutre</h1>
+
+<p>The following diagram sums up the flow of events which take place while the AI learns to play the game.</p>
+
+<p><a href=""><img src="architecture.png" alt="N|Solid" /></a></p>
+
+<p>The main parts are:</p>
+
+<ul>
+<li>Snake Game Environement</li>
+
+<li>Selection </li>
+
+<li>Crossover and Mutation</li>
+
+<li>Fitness function</li>
+</ul>
+
+<p>The first step involves creating a population of randomized neural networks which will be subsequently be evolved for the task at hand. The fitness function evaluates each neural network against the Snake game environment by simulating a game with that corresponding neural network as that snake’s “brain”. Once the simulation of the current generation has completed, the top performing candidates (based on the scoring criteria defined) are deemed as “elites” and chosen to be a part of the next generation directly while </p>
+
+<p>The rest of the population are “crossover-ed” proportionate to their fitnesses, and then randomly mutated (to mimic real world evolution) thereby producing a new generation of children Neural Networks. This process repeats until we reach we reach a generation, where the offsprings (Neural Networks) have perfected themselves for the given task.</p>
+
+<h4 id="allpointsaremultipliedbyascalingfactorwhichdependsonthelengthofthesnake">All points are multiplied by a scaling factor which depends on the length of the snake</h4>
+
+<pre><code>factor = max(1, 0.2 * snake_length)
+</code></pre>
+
+<p>There are no limits for the maximum number of turns a snake can make, however snakes which do not show progress (snakes which loop infinitely) over a period of time (400 steps) are killed.</p>
+
+<hr />
+
+<h1 id="results">Results</h1>
+
+<p>The results vary on a number of factors, like, scoring criteria, the chosen inputs for the Neural network, mutation rate, etc. A comprhenseive study of the results obtained when these various parameters are fine-tuned follows.</p>
+
+<h3 id="version1">Version 1</h3>
+
+<p>This version uses the below mentioned Inputs for all its subsequent sub-verisions.</p>
+
+<p><em>Inputs to the neural network</em>: 6
+<em>Type of inputs</em>: Binary </p>
+
+<ul>
+<li>Is the food straight ahead?</li>
+
+<li>Is the food to the left?</li>
+
+<li>Is the food to right?</li>
+
+<li>Can the snake move forward?</li>
+
+<li>Can the snake move to the left?</li>
+
+<li>Can the snake move to the right?</li>
+</ul>
+
+<p><a href=""><img src="v1.png" alt="N|Solid" /></a></p>
+
+<h4 id="version11">Version 1.1</h4>
+
+<p><strong>Scoring Criteria</strong>
+For each move the snake makes, it is given one or more of the following points.</p>
+
+<ul>
+<li><em>Points for moving towards food:</em> 1</li>
+
+<li><em>Points for moving away from food:</em> -1</li>
+
+<li><em>Points for eating food:</em> 2</li>
+
+<li><em>Points for staying alive:</em> 0</li>
+</ul>
+
+<p><strong>Results at a glance</strong></p>
+
+<ul>
+<li><em>Does it learn to avoid walls?:</em> Yes, 4th gen onwards</li>
+
+<li><em>Does it learn to eat the food?:</em> Yes, 2nd gen onwards</li>
+
+<li><em>Does it learn to not to eat itself?:</em> No</li>
+
+<li><em>Target score of 200 acheived?:</em> No</li>
+
+<li><em>High score:</em> 75, after 11 gens</li>
+</ul>
+
+<p><strong>Details</strong></p>
+
+<ul>
+<li>Snakes learnt to move toward food very early, by the 2nd generation itself, probably owing to the negative reinforcement for moving against food.</li>
+
+<li>By the 4th generation, some snakes are able to get a decently good score of 60 food particles eaten, and avoiding walls swiflty.</li>
+
+<li>A high score of 75 was attained by a snake of the 11th gen.</li>
+
+<li>The next 20 generations were saturated and became stagnant with no improvement at all, and similar high scores and similar snake strategies. The snakes <strong>always killed themselves</strong> around the time when it's length reached 2 times the side of the board.</li>
+
+<li>Maybe the tradeoff isn’t good, between eating the food (2 points) and moving away from food. (-1 points)</li>
+</ul>
+
+<p><strong>Intersesting moves learnt</strong></p>
+
+<h2 id="snakelearnstograbthefoodataveryyoungstage">- Snake learns to grab the food at a very young stage.</h2>
+
+<h4 id="version12">Version 1.2</h4>
+
+<p><strong>Scoring Criteria</strong>
+We reduced the negative reinforcment for moving against the food, hoping the snake can now learn not to kill itself in pursuit of food.</p>
+
+<ul>
+<li><em>Points for moving towards food:</em> 1</li>
+
+<li><em>Points for moving away from food:</em> -0.2</li>
+
+<li><em>Points for eating food:</em> 2</li>
+
+<li><em>Points for staying alive:</em> 0</li>
+</ul>
+
+<p><strong>Results at a glance</strong></p>
+
+<ul>
+<li><em>Does it learn to avoid walls?:</em> Yes, 4th gen onwards</li>
+
+<li><em>Does it learn to eat the food?:</em> Yes, 4th gen onwards</li>
+
+<li><em>Does it learn to not to eat itself?:</em> No</li>
+
+<li><em>Target score of 200 acheived?:</em> No</li>
+
+<li><em>High score:</em> 71, after 14 gens</li>
+</ul>
+
+<p><strong>Details</strong></p>
+
+<ul>
+<li>Learnt to go after food after around 4 gens.</li>
+
+<li>By gen 10, they learn to properly avoid walls.</li>
+
+<li>High score of 71 acheived after around 14 generations</li>
+
+<li>Generations have stagnated after gen 10. In all subsequent generations, the snakes are pretty much the same. Same high scores, same patterns and techniques as in version 1.1</li>
+
+<li>Snakes have not yet learnt to not eat themselves (they can need only learn that when they are long enough). </li>
+
+<li>Almost all snakes die by eating themselves. </li>
+</ul>
+
+<p><strong>Intersesting moves learnt</strong></p>
+
+<ul>
+<li>Snake tries to stick to the boundaries, to keep the centre of the playground empty, to facilitate food eating. </li>
+</ul>
+
+<hr />
+
+<h4 id="version13">Version 1.3</h4>
+
+<p><strong>Scoring Criteria</strong>
+Maybe the tradeoff between losing points for moving away vs. points gained for eating the food still didn't make sense to the snake. We increase the points awarded for eating the food.</p>
+
+<ul>
+<li><em>Points for moving towards food:</em> 1</li>
+
+<li><em>Points for moving away from food:</em> -0.2</li>
+
+<li><em>Points for eating food:</em> 10</li>
+
+<li><em>Points for staying alive:</em> 0</li>
+</ul>
+
+<p><strong>Results at a glance</strong></p>
+
+<ul>
+<li><em>Does it learn to avoid walls?:</em> Yes, 3rd gen onwards</li>
+
+<li><em>Does it learn to eat the food?:</em> Yes, 4th - 5th gen onwards</li>
+
+<li><em>Does it learn to not to eat itself?:</em> No</li>
+
+<li><em>Target score of 200 acheived?:</em> No</li>
+
+<li><em>High score:</em> 89, after 18 gens</li>
+</ul>
+
+<p><strong>Details</strong></p>
+
+<ul>
+<li>The snake performs a interesting “fast zig zag” to virtually reduce its size so that it minimises the chances of it running into itself. </li>
+
+<li>But when it does run into itself, it still hasn’t learnt to turn away and ends up eating itself. </li>
+
+<li>The generations are stagnated after around 20 gens</li>
+</ul>
+
+<p><strong>Intersesting moves learnt</strong></p>
+
+<h2 id="snakeperformsfastzigzagmovestoreduceitsfootprint">- Snake performs fast zig zag moves to reduce its footprint</h2>
+
+<h4 id="version14">Version 1.4</h4>
+
+<p><strong>Scoring Criteria</strong>
+Maybe awarding the snake points for every moment it is alive, will teach it the imporatance of staying alive (and not killing itself)</p>
+
+<ul>
+<li><em>Points for moving towards food:</em> 1</li>
+
+<li><em>Points for moving away from food:</em> -1</li>
+
+<li><em>Points for eating food:</em> 2</li>
+
+<li><em>Points for staying alive:</em> 0.01</li>
+</ul>
+
+<p><strong>Results at a glance</strong></p>
+
+<ul>
+<li><em>Does it learn to avoid walls?:</em> Yes, 3rd gen onwards</li>
+
+<li><em>Does it learn to eat the food?:</em> Yes, 3rd gen onwards</li>
+
+<li><em>Does it learn to not to eat itself?:</em> No</li>
+
+<li><em>Target score of 200 acheived?:</em> No</li>
+
+<li><em>High score:</em> 60, after 15-16 gens</li>
+</ul>
+
+<p><strong>Details</strong></p>
+
+<ul>
+<li>As the snake is awarded points for making every valid move, to move from point A to point B, the snake chooses the longest path possible;  which happens to be a raping zig zag.</li>
+
+<li>This greedy strategy helps the snake to maximize its fitness score, however it does not learn not to eat itself.</li>
+
+<li>The generations are stagnated after 24 gens</li>
+</ul>
+
+<p><strong>Intersesting moves learnt</strong></p>
+
+<h2 id="snakeperformsfastzigzagmovestoincreaseitsfitnessscore">- Snake performs fast zig zag moves to increase its fitness score.</h2>
+
+<h4 id="version15">Version 1.5</h4>
+
+<p><strong>Scoring Criteria</strong>
+Too many useless zig zag moves were made in the previous version. Maybe adding negative reinforcement will tell the snake to avoid unnecessary moves.</p>
+
+<ul>
+<li><em>Points for moving towards food:</em> 1</li>
+
+<li><em>Points for moving away from food:</em> -1</li>
+
+<li><em>Points for eating food:</em> 2</li>
+
+<li><em>Points for staying alive:</em> -0.01</li>
+</ul>
+
+<p><strong>Results at a glance</strong></p>
+
+<ul>
+<li><em>Does it learn to avoid walls?:</em> Yes, 3rd gen onwards</li>
+
+<li><em>Does it learn to eat the food?:</em> Yes, 4th - 5th gen onwards</li>
+
+<li><em>Does it learn to not to eat itself?:</em> No</li>
+
+<li><em>Target score of 200 acheived?:</em> No</li>
+
+<li><em>High score:</em> 43, after 12 gens</li>
+</ul>
+
+<p><strong>Details</strong></p>
+
+<ul>
+<li>As expected, the snake makes very direct and shortest path moves to eat the food. The moves chosen are more “human” like, at least in the initial stages. </li>
+
+<li>However, the snake takes this too seriously and often ends up eating itself, because the food was in that direction. </li>
+
+<li>The logical decision would be to go around, but that would take more moves and cost it some points. Hence it chooses to continue to move directly at the food, eating itself and dying in the process. </li>
+
+<li>Never gets past that; stagnates.</li>
+</ul>
+
+<p><strong>Intersesting moves learnt</strong></p>
+
+<h2 id="snakestrategisestominimisenumberofmovesitmakes">- Snake strategises to minimise number of moves it makes.</h2>
+
+<h4 id="version16">Version 1.6</h4>
+
+<p><strong>Scoring Criteria</strong>
+Teach the snake that it is not wrong to against the direction of the food.</p>
+
+<ul>
+<li><em>Points for moving towards food:</em> 1</li>
+
+<li><em>Points for moving away from food:</em> 0</li>
+
+<li><em>Points for eating food:</em> 2</li>
+
+<li><em>Points for staying alive:</em> 0</li>
+</ul>
+
+<p><strong>Results at a glance</strong></p>
+
+<ul>
+<li><em>Does it learn to avoid walls?:</em> Yes, 8th gen onwards</li>
+
+<li><em>Does it learn to eat the food?:</em> Yes, 7th gen onwards</li>
+
+<li><em>Does it learn to not to eat itself?:</em> Yes, 18th gen onwards</li>
+
+<li><em>Target score of 200 acheived?:</em> No</li>
+
+<li><em>High score:</em> 183, after 29 gens</li>
+</ul>
+
+<p><strong>Details</strong></p>
+
+<ul>
+<li>Takes time to learn to go after food, 7 gens in.</li>
+
+<li>After 15 gens, snakes still eat themselves. </li>
+
+<li>In gen 17 a snake learnt super complex moves, avoided eating itself on multiple times. A high score of 100 was achieved, and the quality of not eating itself is starting to carry over to children. </li>
+
+<li>Snake learns really complex moves and starts thinking ahead in time - it is not greedy to grab the food at the earliest possible time. It rather “sets the stage” by performing a series of manoeuvres which makes it easier for the snake to eat the food AND avoid self trapping deaths. </li>
+
+<li>By gen 21, it has learn the strategy of following its own tail to stay alive. </li>
+</ul>
+
+<p><strong>Intersesting moves learnt</strong></p>
+
+<ul>
+<li>Does not stick to wall, preferes to eat food in shortest distance if possible.</li>
+
+<li>Learnt how to avoid spiralling deaths after 20 gens.</li>
+</ul>
+
+<h2 id="learntthestrategyoffollowingitsowntailtostayalive">- Learnt the strategy of following its own tail to stay alive.</h2>
+
+<h3 id="version2">Version 2</h3>
+
+<p>This version uses the below mentioned Inputs for all its subsequent sub-verisions. We added a new input to the neural network, which is a <strong>feedback loop</strong>. In other words, its previous output is one of its current inputs. Now the snake has the knowledge of the move it made last, left or right.</p>
+
+<p><em>Inputs to the neural network</em>: 7
+<em>Type of inputs</em>: Binary </p>
+
+<ul>
+<li>Is the food straight ahead?</li>
+
+<li>Is the food to the left?</li>
+
+<li>Is the food to right?</li>
+
+<li>Can the snake move forward?</li>
+
+<li>Can the snake move to the left?</li>
+
+<li>Can the snake move to the right?</li>
+
+<li>What was the last move the snake made?</li>
+</ul>
+
+<p><a href=""><img src="v2.png" alt="N|Solid" /></a></p>
+
+<h4 id="version21">Version 2.1</h4>
+
+<p><strong>Scoring Criteria</strong></p>
+
+<ul>
+<li><em>Points for moving towards food:</em> 1</li>
+
+<li><em>Points for moving away from food:</em> 0</li>
+
+<li><em>Points for eating food:</em> 2</li>
+
+<li><em>Points for staying alive:</em> 0</li>
+</ul>
+
+<p><strong>Results at a glance</strong></p>
+
+<ul>
+<li><em>Does it learn to avoid walls?:</em> Yes, 6rd gen onwards</li>
+
+<li><em>Does it learn to eat the food?:</em> Yes, 8th gen onwards</li>
+
+<li><em>Does it learn to not to eat itself?:</em> Yes, 21st gen onwards</li>
+
+<li><em>Target score of 200 acheived?:</em> Yes, in 28 gens</li>
+
+<li><em>High score:</em> 212, after 30 gens</li>
+</ul>
+
+<p><strong>Details</strong></p>
+
+<ul>
+<li>The snake initially learns slowly, owing to an extra input.</li>
+
+<li>Over time, it picks up the basics - grab food, avoid walls, don't kill yourself</li>
+
+<li>After around 20 gens, the extra knowledge input started benefitting the snake</li>
+
+<li>It made movees accordingly, such that it does not trap iteslf. It made very intelligent moves, and it was thinking ahead in time.</li>
+</ul>
+
+<p><strong>Intersesting moves learnt</strong></p>
+
+<h2 id="highlysentientmoves">- Highly sentient moves</h2>
+
+<h1 id="takingitonestepfurther">Taking it one step further</h1>
+
+<p>To increase the difficulty of this game, we now introduced <strong>obstacles</strong> which appear and dissappear at random times.</p>
+
+<p>With the same configuration as in version 2.1, the snake learns how to avoid obstacles effectively. Learning is slower than usual, as expected.</p>
+
+<p><a href=""><img src="http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake.png" alt="N|Solid" /></a></p>
+
+<hr />
+
+<h1 id="conculsion">Conculsion</h1>
+
+<p>Our study now comes to an end. We discovered that a NEAT stratgey to solve a game playing environemnt can be highly effective provided the inputs are definitive and the scoring criteria is well-formed. The concept can be extended to an <strong>Automous Target Seeking Algorithm</strong> which can be applied in a case such as when a robot has to navigate from point A to point B whilst avoiding obstacles by perceiving its environment in real-time.</p>
