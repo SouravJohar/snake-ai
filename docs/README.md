@@ -28,7 +28,7 @@ The overall, high-level idea is that we award positive points for every good mov
 # Architecutre
 The following diagram sums up the flow of events which take place while the AI learns to play the game.
 
-![Alt Text](architecture.png)
+![Alt Text](https://i.imgur.com/bOFIru3.png)
 
 The main parts are:
 - Snake Game Environement
@@ -63,7 +63,7 @@ This version uses the below mentioned Inputs for all its subsequent sub-verision
 - Can the snake move to the left?
 - Can the snake move to the right?
 
-![Alt Text](v1.png)
+![Alt Text](https://i.imgur.com/2od7jsh.png)
 
 #### Version 1.1
 **Scoring Criteria**
@@ -248,7 +248,7 @@ This version uses the below mentioned Inputs for all its subsequent sub-verision
 - Can the snake move to the right?
 - What was the last move the snake made?
 
-![Alt Text](v2.png)
+![Alt Text](https://i.imgur.com/RGp3n2p.png)
 
 
 #### Version 2.1
@@ -277,7 +277,7 @@ This version uses the below mentioned Inputs for all its subsequent sub-verision
 
 **A gameplay**
 
-![Alt Text](gameplay.gif)
+![Alt Text](https://i.imgur.com/vfYSAxg.gif)
 
 ---------------------------------------------------------------------------------
 
@@ -288,7 +288,7 @@ To increase the difficulty of this game, we now introduced **obstacles** which a
 With the same configuration as in version 2.1, the snake learns how to avoid obstacles effectively. Learning is slower than usual, as expected.
 
 
-![Alt Text](gameplay-with-obstacles.gif)
+![Alt Text](https://i.imgur.com/j9ac70T.gif)
 
 --------------------------------------------------------------------------------
 
