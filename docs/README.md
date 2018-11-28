@@ -1,6 +1,6 @@
 # A NEAT way to play Snake
 
-[![N|Solid](http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake.png)]()
+![Alt Text](http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake.png)
 
 This reposortory contains the source code which evolves a Neural Network to play and master the Snake game. This code runs on the browser, so it's really easy to set it up. The stack used is:
 
@@ -28,7 +28,7 @@ The overall, high-level idea is that we award positive points for every good mov
 # Architecutre
 The following diagram sums up the flow of events which take place while the AI learns to play the game.
 
-![Alt Text](snake-ai/architecture.png)
+![Alt Text](architecture.png)
 
 The main parts are:
 - Snake Game Environement
@@ -63,7 +63,7 @@ This version uses the below mentioned Inputs for all its subsequent sub-verision
 - Can the snake move to the left?
 - Can the snake move to the right?
 
-![Alt Text](snake-ai/v1.png)
+![Alt Text](v1.png)
 
 #### Version 1.1
 **Scoring Criteria**
@@ -248,7 +248,7 @@ This version uses the below mentioned Inputs for all its subsequent sub-verision
 - Can the snake move to the right?
 - What was the last move the snake made?
 
-![Alt Text](snake-ai/v2.png)
+![Alt Text](v2.png)
 
 
 #### Version 2.1
@@ -277,7 +277,7 @@ This version uses the below mentioned Inputs for all its subsequent sub-verision
 
 **A gameplay**
 
-![Alt Text](snake-ai/gameplay.gif)
+![Alt Text](gameplay.gif)
 
 ---------------------------------------------------------------------------------
 
@@ -288,7 +288,7 @@ To increase the difficulty of this game, we now introduced **obstacles** which a
 With the same configuration as in version 2.1, the snake learns how to avoid obstacles effectively. Learning is slower than usual, as expected.
 
 
-![Alt Text](snake-ai/gameplay-with-obstacles.gif)
+![Alt Text](gameplay-with-obstacles.gif)
 
 --------------------------------------------------------------------------------
 
