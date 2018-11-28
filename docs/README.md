@@ -28,7 +28,7 @@ The overall, high-level idea is that we award positive points for every good mov
 # Architecutre
 The following diagram sums up the flow of events which take place while the AI learns to play the game.
 
-[![N|Solid](../architecture.png)]()
+![Alt Text](snake-ai/architecture.png)
 
 The main parts are:
 - Snake Game Environement
@@ -63,7 +63,7 @@ This version uses the below mentioned Inputs for all its subsequent sub-verision
 - Can the snake move to the left?
 - Can the snake move to the right?
 
-[![N|Solid](../v1.png)]()
+![Alt Text](snake-ai/v1.png)
 
 #### Version 1.1
 **Scoring Criteria**
@@ -90,6 +90,7 @@ For each move the snake makes, it is given one or more of the following points.
 
 **Intersesting moves learnt**
 - Snake learns to grab the food at a very young stage.
+
 -----------------------------------------------------------------------------
 #### Version 1.2
 **Scoring Criteria**
@@ -143,6 +144,7 @@ Maybe the tradeoff between losing points for moving away vs. points gained for e
 
 **Intersesting moves learnt**
 - Snake performs fast zig zag moves to reduce its footprint
+
 ---------------------------------------------------------------------------------
 
 
@@ -169,6 +171,7 @@ Maybe awarding the snake points for every moment it is alive, will teach it the 
 
 **Intersesting moves learnt**
 - Snake performs fast zig zag moves to increase its fitness score.
+
 ---------------------------------------------------------------------------------
 
 
@@ -196,6 +199,7 @@ Too many useless zig zag moves were made in the previous version. Maybe adding n
 
 **Intersesting moves learnt**
 - Snake strategises to minimise number of moves it makes.
+
 --------------------------------------------------------------------------------
 
 
@@ -228,6 +232,7 @@ Teach the snake that it is not wrong to against the direction of the food.
 - Does not stick to wall, preferes to eat food in shortest distance if possible.
 - Learnt how to avoid spiralling deaths after 20 gens.
 - Learnt the strategy of following its own tail to stay alive.
+
 ---------------------------------------------------------------------------------
 
 ### Version 2
@@ -243,7 +248,7 @@ This version uses the below mentioned Inputs for all its subsequent sub-verision
 - Can the snake move to the right?
 - What was the last move the snake made?
 
-[![N|Solid](../v2.png)]()
+![Alt Text](snake-ai/v2.png)
 
 
 #### Version 2.1
@@ -272,7 +277,7 @@ This version uses the below mentioned Inputs for all its subsequent sub-verision
 
 **A gameplay**
 
-![Alt Text](../gameplay.gif)
+![Alt Text](snake-ai/gameplay.gif)
 
 ---------------------------------------------------------------------------------
 
@@ -283,7 +288,7 @@ To increase the difficulty of this game, we now introduced **obstacles** which a
 With the same configuration as in version 2.1, the snake learns how to avoid obstacles effectively. Learning is slower than usual, as expected.
 
 
-![Alt Text](../gameplay-with-obstacles.gif)
+![Alt Text](snake-ai/gameplay-with-obstacles.gif)
 
 --------------------------------------------------------------------------------
 
