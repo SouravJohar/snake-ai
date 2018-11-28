@@ -28,7 +28,7 @@ The overall, high-level idea is that we award positive points for every good mov
 # Architecutre
 The following diagram sums up the flow of events which take place while the AI learns to play the game.
 
-[![N|Solid](architecture.png)]()
+[![N|Solid](../architecture.png)]()
 
 The main parts are:
 - Snake Game Environement
@@ -63,7 +63,7 @@ This version uses the below mentioned Inputs for all its subsequent sub-verision
 - Can the snake move to the left?
 - Can the snake move to the right?
 
-[![N|Solid](v1.png)]()
+[![N|Solid](../v1.png)]()
 
 #### Version 1.1
 **Scoring Criteria**
@@ -243,7 +243,7 @@ This version uses the below mentioned Inputs for all its subsequent sub-verision
 - Can the snake move to the right?
 - What was the last move the snake made?
 
-[![N|Solid](v2.png)]()
+[![N|Solid](../v2.png)]()
 
 
 #### Version 2.1
@@ -269,6 +269,11 @@ This version uses the below mentioned Inputs for all its subsequent sub-verision
 
 **Intersesting moves learnt**
 - Highly sentient moves
+
+**A gameplay**
+
+![Alt Text](../gameplay.gif)
+
 ---------------------------------------------------------------------------------
 
 # Taking it one step further
