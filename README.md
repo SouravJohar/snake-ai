@@ -278,7 +278,7 @@ To increase the difficulty of this game, we now introduced **obstacles** which a
 With the same configuration as in version 2.1, the snake learns how to avoid obstacles effectively. Learning is slower than usual, as expected.
 
 
-[![N|Solid](http://rembound.com/files/creating-a-snake-game-tutorial-with-html5/snake.png)]()
+![Alt Text](gameplay-with-obstacles.gif)
 
 --------------------------------------------------------------------------------
 
