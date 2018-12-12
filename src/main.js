@@ -9,7 +9,7 @@ Config.warnings = false
 
 
 // defining neat constructor
-const neat = new Neat(6, 2, null, {
+const neat = new Neat(7, 2, null, {
     popsize: GAMES,
     elitism: ELITISM,
     mutationRate: MUTATION_RATE,
@@ -58,6 +58,7 @@ const runner = new Runner({
     ateFood: POINTS_ATE_FOOD,
     death: DEATH_BY_BITE,
     timeAlive: TIME_ALIVE
+    // add another scoring method for death
   },
 
 

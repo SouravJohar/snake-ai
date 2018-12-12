@@ -5,6 +5,14 @@ class Runner {
     this.games = []
     this.gamesFinished = 0
     this.onEndGeneration = onEndGeneration
+    this.gameSize = gameSize
+    this.gameUnit = gameUnit
+    this.lowestScoreAllowed = lowestScoreAllowed
+    this.maxTurns = maxTurns
+    this.score = score
+    this.frameRate = frameRate
+    this.gameSize = gameSize
+    this.gameUnit = gameUnit
 
     for (let i = 0; i < games; i++) {
       this.games.push(new Game({
@@ -49,6 +57,19 @@ class Runner {
 
     const newGeneration = []
 
+    var fittestBrain = this.games[0].snake.brain
+    //console.log("snake:", fittestBrain)
+    //var simulator = new Sim({fittestBrain, gameSize, gameUnit, frameRate, maxTurns, lowestScoreAllowed, score, onEndGeneration})
+    // var sim = new Simulator({
+    //     size: this.gameSize,
+    //     unit: this.gameUnit,
+    //     frameRate: this.frameRate,
+    //     maxTurns: this.maxTurns,
+    //     lowestScoreAllowed: this.lowestScoreAllowed,
+    //     score: this.score,
+    //     fittest: fittestSnake,
+    //     onGameOver: () => this.endGeneration()
+    //   })
     // push the most fit directly into the next gen
     var elites = []
     for (let i = 0; i < this.neat.elitism; i++) {
@@ -60,9 +81,10 @@ class Runner {
     }
 
 
+    // might want to mutate first and then push the elite
     this.neat.population = newGeneration
-    
-    // add the elites and mutate the entire population
+    //this.neat.mutate()
+
     this.neat.population = newGeneration.concat(elites) 
     this.neat.mutate()
     this.neat.generation++
