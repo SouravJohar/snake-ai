@@ -62,6 +62,7 @@ class Game {
           p.fill(0)
           p.textSize(15)
           p.text("Score: " + game.snake.brain.score.toString(), 5, 20)
+          p.text("food: " + game.snake.foodNumber.toString(), 5, 40)
           return
         }
           if (document.getElementById('train_fps').checked) {
