@@ -31,6 +31,10 @@ const chartData = {
     {
       name: 'Min',
       values: []
+    },
+    {
+      name: 'highest eaten',
+      values: []
     }
   ]
 }
@@ -63,12 +67,13 @@ const runner = new Runner({
 
 
   // chart generation
-  onEndGeneration: ({generation, max, avg, min, network}) => {
+  onEndGeneration: ({generation, max, avg, min, network, highestEaten}) => {
     drawGraph(network.graph(300, 300), '.draw');
     chartData.labels.push(generation.toString())
     chartData.datasets[0].values.push(max)
     chartData.datasets[1].values.push(avg)
     chartData.datasets[2].values.push(min)
+    chartData.datasets[3].values.push(highestEaten)
 
     if (chartData.labels.length > 200) {
       chartData.labels.shift()
@@ -88,10 +93,20 @@ const runner = new Runner({
 runner.startGeneration()
 
 function saveData() {
-  var currentDate = new Date();
-  var value = currentDate.getHours() + " " +  currentDate.getMinutes() + " " + currentDate.getSeconds();
-  // console.log(chartData.datasets[0].values)
   var vals = chartData.datasets[0].values;
+  var string="";
+
+  for(var i=1; i<vals.length; i++) {
+    string =  string + "(" +  i + ","+ vals[i] + ")";
+  }
+  $('textarea#data-well').text(string);
+
+ 
+
+}
+
+function saveData2() {
+  var vals = chartData.datasets[3].values;
   var string="";
 
   for(var i=1; i<vals.length; i++) {
