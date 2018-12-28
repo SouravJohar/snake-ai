@@ -38,7 +38,8 @@ const chartData = {
 const chart = new Chart('#chart', {
   title: 'generation score history',
   type: 'line',
-  height: 200,
+  height: 500,
+  width: 1000,
   data: chartData
 })
 
@@ -70,7 +71,7 @@ const runner = new Runner({
     chartData.datasets[1].values.push(avg)
     chartData.datasets[2].values.push(min)
 
-    if (chartData.labels.length > 15) {
+    if (chartData.labels.length > 200) {
       chartData.labels.shift()
       chartData.datasets.forEach(d => d.values.shift())
     }
@@ -86,3 +87,16 @@ const runner = new Runner({
 })
 
 runner.startGeneration()
+
+function saveData() {
+  var currentDate = new Date();
+  var value = currentDate.getHours() + " " +  currentDate.getMinutes() + " " + currentDate.getSeconds();
+  // console.log(chartData.datasets[0].values)
+  var vals = chartData.datasets[0].values;
+  var string="";
+
+  for(var i=1; i<vals.length; i++) {
+    string =  string + "(" +  i + ","+ vals[i] + ")";
+  }
+  $('textarea#data-well').text(string);
+}

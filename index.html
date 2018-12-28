@@ -8,20 +8,26 @@
     <script src="lib/neataptic.min.js"></script>
     <script src="lib/graph.js"></script>
     <link rel="stylesheet" type="text/css" href="lib/graph.css">
+    
+    <style>
+      #chart {
+        width: 1000px;
+      }
+    </style>
+
   </head>
   <body>
     <div class="container">
-
       <div class="row">
         <h3 style="margin-left:25%; margin-top:15"> Neural Network Topology</h3>
         <svg class="draw" width="1000px" height="400px"/>
       </div>
 
     </div>
+    <button onclick="saveData()">Save data</button>
     <p style="margin-top:15;margin-left:10%">Experiment Speed: <br> <input type="radio" id="train_fps" name="fps" value="120" checked> Train<br>
         <input type="radio" id="normal_fps" name="fps" value="10"> Normal<br> </p>
     <div id="wrapper">
-
       <div id="chart"></div>
       <div id="status">
         <p>generation<br><span id="generation">0</span></p>
@@ -29,6 +35,8 @@
       </div>
     </div>
 
+
+    <textarea id="data-well" rows="5" cols="100">No data here!</textarea>
 
     <script src="lib/p5.min.js"></script>
     <script src="lib/frappe-charts.min.iife.js"></script>
@@ -38,5 +46,9 @@
     <script src="src/game.js"></script>
     <script src="src/runner.js"></script>
     <script src="src/main.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+  crossorigin="anonymous"></script>
   </body>
 </html>
