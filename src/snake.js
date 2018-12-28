@@ -48,7 +48,7 @@ class Snake {
     let isFoodRight = 0
 
     let head = this.segments[this.segments.length - 1]
-    let factor = Math.max(1, this.segments.length * 0.2)
+    let factor = 1
 
     this.brain.score += this.scoreModifiers.timeAlive
 

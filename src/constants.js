@@ -24,4 +24,3 @@ const POINTS_ATE_FOOD = 2
 const DEATH_BY_WALL = 0
 const DEATH_BY_BITE = 0
 const TIME_ALIVE = 0
-// add a score for moving too close to tail
