@@ -49,8 +49,6 @@ class Snake {
 
     let head = this.segments[this.segments.length - 1]
 
-    this.brain.score += this.scoreModifiers.timeAlive
-
 if (this.difficult) {
     if (Math.random() < 0.11 && this.obstacles.length < 5) {
       var coords = game.getAvailablePositions()
