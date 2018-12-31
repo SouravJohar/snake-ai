@@ -190,12 +190,11 @@ if (this.difficult) {
     const output = this.brain.activate(input).map(o => Math.round(o))
     // set the new direction
 
-    // if the snake cannot move forward and choses to move left or right - award points for near miss
-    if (!canMoveForward && (output[0] || output[1]) && this.segments.length > 15){
-      this.brain.score += 100
-    }
-
-
+    // // if the snake cannot move forward and choses to move left or right - award points for near miss
+    // if (!canMoveForward && (output[0] || output[1]) && this.segments.length > 15){
+    //   this.brain.score += 100
+    // }
+    
     if (output[0]) { // turn left
       this.brain.score += isFoodLeft ? this.scoreModifiers.movedTowardsFood : this.scoreModifiers.movedAgainstFood
       this.history[0] = this.history[1]
