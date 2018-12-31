@@ -48,7 +48,6 @@ class Snake {
     let isFoodRight = 0
 
     let head = this.segments[this.segments.length - 1]
-    let factor = 1
 
     this.brain.score += this.scoreModifiers.timeAlive
 
@@ -192,13 +191,15 @@ if (this.difficult) {
     this.observations = input
     const output = this.brain.activate(input).map(o => Math.round(o))
     // set the new direction
-    // if (!canMoveForward && (output[0] || output[1]) && this.segments.length > 15){
-    //   this.brain.score += 100 * factor
-    // }
-    // else
-    //   this.brain.score = 0
+
+    // if the snake cannot move forward and choses to move left or right - award points for near miss
+    if (!canMoveForward && (output[0] || output[1]) && this.segments.length > 15){
+      this.brain.score += 100
+    }
+
+
     if (output[0]) { // turn left
-      this.brain.score += isFoodLeft ? this.scoreModifiers.movedTowardsFood * factor : this.scoreModifiers.movedAgainstFood * factor
+      this.brain.score += isFoodLeft ? this.scoreModifiers.movedTowardsFood : this.scoreModifiers.movedAgainstFood
       this.history[0] = this.history[1]
       this.history[1] = 1
       switch (this.direction) {
@@ -208,7 +209,7 @@ if (this.difficult) {
         case 'right': this.direction = 'up'; break
       }
     } else if (output[1]) { // turn right
-      this.brain.score += isFoodRight ? this.scoreModifiers.movedTowardsFood * factor : this.scoreModifiers.movedAgainstFood * factor
+      this.brain.score += isFoodRight ? this.scoreModifiers.movedTowardsFood : this.scoreModifiers.movedAgainstFood
       this.history[0] = this.history[1]
       this.history[1] = -1
       switch (this.direction) {
@@ -218,7 +219,7 @@ if (this.difficult) {
         case 'right': this.direction = 'down'; break
       }
     } else { // go forward
-      this.brain.score += isFoodForward ? this.scoreModifiers.movedTowardsFood * factor : this.scoreModifiers.movedAgainstFood * factor
+      this.brain.score += isFoodForward ? this.scoreModifiers.movedTowardsFood : this.scoreModifiers.movedAgainstFood
     }
 
     // move the snake
@@ -268,7 +269,7 @@ if (this.difficult) {
       this.isEating = true
       this.foodNumber++
       this.hungrySteps = 0;
-      this.brain.score += this.scoreModifiers.ateFood * factor
+      this.brain.score += this.scoreModifiers.ateFood
     }
 
   }
