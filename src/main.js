@@ -61,9 +61,7 @@ const runner = new Runner({
     movedTowardsFood: POINTS_MOVED_TOWARDS_FOOD,
     movedAgainstFood: POINTS_MOVED_AGAINST_FOOD,
     ateFood: POINTS_ATE_FOOD,
-    death: DEATH_BY_BITE,
-    timeAlive: TIME_ALIVE
-    // add another scoring method for death
+    death: DEATH_BY_BITE
   },
 
 
