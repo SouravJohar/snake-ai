@@ -12,7 +12,6 @@ class Game {
     this.grid = []
     this.snake = new Snake(score)
     this.turns = 0
-    this.timeAlive = 0
 
     for (let x = 0; x < this.unitsPerRow; x++) {
       for (let y = 0; y < this.unitsPerRow; y++) {
