@@ -13,7 +13,7 @@ class Snake {
     this.history = [0,0]
 
     // turn on the obstacles
-    this.difficult = true;
+    this.difficult = false;
   }
 
   reset () {

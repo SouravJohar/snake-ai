@@ -86,6 +86,8 @@ const runner = new Runner({
 
     document.getElementById('generation').innerHTML = generation
     document.getElementById('highest-score').innerHTML = highestScore
+    console.log("generation", generation)
+    console.log("max", max, "min", min, "avg", avg)
   }
 })
 
